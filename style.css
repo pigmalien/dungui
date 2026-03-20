@@ -1,0 +1,41 @@
+:root {
+  /* Dark Tones (Shadows/Borders) */
+  --pui-color-0: #1c1117;   /* [cite: 1] */
+  --pui-color-1: #301e28;   /* [cite: 1] */
+  --pui-color-2: #3a2430;   /* [cite: 1] */
+  --pui-color-3: #4b202e;   /* [cite: 1] */
+  --pui-color-4: #362b22;   /* [cite: 1] */
+  --pui-color-5: #432835;   /* [cite: 1] */
+
+  /* Mid Tones */
+  --pui-color-6: #2b3154;   /* [cite: 1] */
+  --pui-color-7: #6d2324;   /* [cite: 1] */
+  --pui-color-8: #4f3740;   /* [cite: 1] */
+  --pui-color-9: #354628;   /* [cite: 1] */
+  --pui-color-10: #60452b;  /* [cite: 1] */
+  --pui-color-11: #803d37;  /* [cite: 1] */
+  --pui-color-12: #484c7d;  /* [cite: 1] */
+  --pui-color-13: #7a4191;  /* [cite: 1] */
+
+  /* Vibrant Tones */
+  --pui-color-14: #b23d42;  /* [cite: 1] */
+  --pui-color-15: #b83f32;  /* [cite: 1] */
+  --pui-color-16: #396b86;  /* [cite: 1] */
+  --pui-color-17: #606541;  /* [cite: 1] */
+  --pui-color-18: #7e5e3d;  /* [cite: 1] */
+  --pui-color-19: #4b7734;  /* [cite: 1] */
+  --pui-color-20: #75675f;  /* [cite: 1] */
+  --pui-color-21: #aa6623;  /* [cite: 1] */
+  --pui-color-22: #5c8faa;  /* [cite: 1, 2] */
+  --pui-color-23: #c27d3a;  /* [cite: 2] */
+
+  /* Light Tones (Paper/Highlights) */
+  --pui-color-24: #8b9c68;  /* [cite: 2] */
+  --pui-color-25: #9d958e;  /* [cite: 2] */
+  --pui-color-26: #c19b6f;  /* [cite: 2] */
+  --pui-color-27: #8db8cd;  /* [cite: 2] */
+  --pui-color-28: #cdb046;  /* [cite: 2] */
+  --pui-color-29: #ddd5c1;  /* [cite: 2] */
+  --pui-color-30: #e3da99;  /* [cite: 2] */
+  --pui-color-31: #ffffff;  /* [cite: 2] */
+}
