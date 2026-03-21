@@ -43,13 +43,53 @@
   --pui-color-29: #ddd5c1;  /* [cite: 2] */
   --pui-color-30: #e3da99;  /* [cite: 2] */
   --pui-color-31: #ffffff;  /* [cite: 2] */
+
+  /* Semantic Variables (Default Dark Mode) */
+  --bg-body: var(--pui-color-1);
+  --text-main: var(--pui-color-31);
+  --text-shadow: var(--pui-color-0);
+
+  --input-bg: var(--pui-color-4);
+  --input-border: var(--pui-color-0);
+  --input-hover: var(--pui-color-10);
+  
+  --accent-fill: var(--pui-color-21);      /* Active State/Checkmark */
+  --accent-highlight: var(--pui-color-23); /* 3D Highlight for accent */
+  --accent-shadow: var(--pui-color-10);    /* 3D Shadow for accent */
+
+  --slider-track-border: var(--pui-color-28);
+  --slider-thumb: var(--pui-color-28);
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] {
+  --bg-body: var(--pui-color-29); /* Parchment color */
+  --text-main: var(--pui-color-4); /* Dark ink text */
+  --text-shadow: rgba(0,0,0,0.1);
+
+  --input-bg: var(--pui-color-31); /* White paper inputs */
+  --input-border: var(--pui-color-10); /* Brown borders */
+  --input-hover: var(--pui-color-26);
+
+  --accent-fill: var(--pui-color-14); /* Red ink for selection */
+  --accent-highlight: var(--pui-color-15);
+  --accent-shadow: var(--pui-color-11);
+
+  --slider-track-border: var(--pui-color-14);
+  --slider-thumb: var(--pui-color-14);
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn {
   border: solid transparent;
   border-image-slice: 4 fill;
   border-image-width: 8px;
-  color: var(--pui-color-31);
+  color: var(--pui-color-31); /* Buttons keep white text in both modes */
   padding: 10px 20px;
   font-family: 'FFS', sans-serif;
   font-size: 20px;
@@ -68,6 +108,18 @@
 .btn:active {
   filter: brightness(0.9);
   transform: translateY(2px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.btn:disabled:hover,
+.btn:disabled:active {
+  filter: grayscale(1);
+  transform: none;
 }
 
 .btn-blue {
@@ -119,23 +171,23 @@
   position: relative;
   height: 24px;
   width: 24px;
-  background-color: var(--pui-color-4); /* Deep recessed area */
+  background-color: var(--input-bg);
   margin-right: 15px;
             
             /* Creating the "Chunky" Pixel Border with Box Shadows */
             /* Logic: Layering shadows to simulate a 2px stepped outline */
             box-shadow: 
                 /* Outer Dark Outline */
-                0 -2px 0 0 var(--pui-color-0), 0 2px 0 0 var(--pui-color-0),
-                -2px 0 0 0 var(--pui-color-0), 2px 0 0 0 var(--pui-color-0),
+                0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
+                -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
                 /* Inner Shadow (Depth) */
-                inset 0 4px 0 0 rgba(0,0,0,0.4),
-                inset 4px 0 0 0 rgba(0,0,0,0.4);
+                inset 0 2px 0 0 var(--input-border),
+                inset 2px 0 0 0 var(--input-border);
         }
 
         /* Hover State */
         .pixel-radio:hover .checkmark {
-            background-color: var(--pui-color-10);
+            background-color: var(--input-hover);
         }
 
         /* The "Check" (The Gem/Fill) */
@@ -147,13 +199,13 @@
             top: 4px;
             width: 16px;
             height: 16px;
-            background-color: var(--pui-color-21); /* Core color */
+            background-color: var(--accent-fill);
             
             /* Give the gem a 3D pixel look */
             box-shadow: 
-                inset -4px -4px 0 0 var(--pui-color-10), /* Bottom shadow */
-                inset 4px 4px 0 0 var(--pui-color-23),   /* Top highlight */
-                0 0 0 2px var(--pui-color-0);            /* Separation from socket */
+                inset -2px -2px 0 0 var(--accent-shadow),
+                inset 2px 2px 0 0 var(--accent-highlight),
+                0 0 0 2px var(--input-border);
         }
 
         /* Show the check when selected */
@@ -163,8 +215,8 @@
 
         /* Special "Active/Selected" glow for the label */
         .pixel-radio input:checked ~ span {
-            color: var(--pui-color-21);
-            text-shadow: 1.5px 1.5px 0px var(--pui-color-0);
+            color: var(--accent-fill);
+            text-shadow: 1.5px 1.5px 0px var(--text-shadow);
         }
 
         .label-text {
@@ -172,3 +224,277 @@
            font-size: 24px;
           transition: color 0.2s;
         }
+
+/* --- Pixel Checkbox --- */
+
+.pixel-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  margin-top: 10px;
+}
+
+.pixel-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.pixel-checkbox:hover .checkmark {
+  background-color: var(--input-hover);
+}
+
+/* The X Shape using single 4px element and shadow grid */
+.pixel-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  top: 2px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--accent-fill);
+  box-shadow: 
+      4px 4px 0 var(--accent-fill),
+      8px 8px 0 var(--accent-fill),
+      12px 12px 0 var(--accent-fill),
+      16px 16px 0 var(--accent-fill),
+      16px 0 0 var(--accent-fill),
+      12px 4px 0 var(--accent-fill),
+      4px 12px 0 var(--accent-fill),
+      0 16px 0 var(--accent-fill);
+}
+
+.pixel-checkbox input:checked ~ .checkmark::after {
+  display: block;
+}
+
+/* Active state for label */
+.pixel-checkbox input:checked ~ span {
+  color: var(--accent-fill);
+  text-shadow: 1.5px 1.5px 0px var(--text-shadow);
+}
+
+/* Disabled State */
+.pixel-radio:has(input:disabled),
+.pixel-checkbox:has(input:disabled) {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.pixel-radio:has(input:disabled):hover .checkmark,
+.pixel-checkbox:has(input:disabled):hover .checkmark {
+  background-color: var(--input-bg);
+}
+
+/* --- Pixel Range Slider --- */
+
+.slider-container {
+  width: 300px;
+  margin-top: 20px;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'FFS', sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0px var(--text-shadow);
+  color: var(--text-main);
+}
+
+/* Base Input Styling */
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+/* --- THE TRACK --- */
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12px;
+  background: var(--input-bg);
+  box-shadow: 
+      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
+      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
+      inset 0 4px 0 0 var(--input-border);
+  image-rendering: pixelated;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 12px;
+  background: var(--input-bg);
+  box-shadow: 
+      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
+      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
+      inset 0 4px 0 0 var(--input-border);
+}
+
+/* --- THE PIXELATED THUMB --- */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 24px;
+  width: 16px;
+  background: var(--slider-thumb);
+  margin-top: -6px;
+  border-radius: 0; /* Ensures hard edges */
+  
+  /* Enhanced Pixel Shadowing */
+  box-shadow: 
+      /* Outer Gold Border */
+      0 -2px 0 0 var(--slider-thumb), 0 2px 0 0 var(--slider-thumb),
+      -2px 0 0 0 var(--slider-thumb), 2px 0 0 0 var(--slider-thumb),
+      /* Inner Detail for blocky feel */
+      inset -2px -4px 0 0 var(--accent-shadow), 
+      inset 2px 4px 0 0 var(--text-main),
+      /* Center 'Gem' logic */
+      inset 0 0 0 4px var(--slider-thumb),
+      inset 0 0 0 6px var(--accent-fill),
+      /* Hard edge bottom shadow to simulate weight */
+      0 4px 0 0 var(--input-border);
+  
+  image-rendering: pixelated;
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+  filter: brightness(1.2);
+  box-shadow: 
+      0 -2px 0 0 var(--text-main), 0 2px 0 0 var(--text-main),
+      -2px 0 0 0 var(--text-main), 2px 0 0 0 var(--text-main),
+      inset -2px -4px 0 0 var(--accent-shadow), 
+      inset 2px 4px 0 0 var(--text-main),
+      inset 0 0 0 4px var(--slider-thumb),
+      inset 0 0 0 6px var(--accent-fill),
+      0 4px 0 0 var(--input-border);
+}
+
+input[type=range]::-moz-range-thumb {
+  height: 24px;
+  width: 16px;
+  background: var(--slider-thumb);
+  border: none;
+  border-radius: 0;
+  box-shadow: 
+      0 -2px 0 0 var(--slider-thumb), 0 2px 0 0 var(--slider-thumb),
+      -2px 0 0 0 var(--slider-thumb), 2px 0 0 0 var(--slider-thumb),
+      inset -2px -4px 0 0 var(--accent-shadow), 
+      inset 2px 4px 0 0 var(--text-main),
+      inset 0 0 0 4px var(--slider-thumb),
+      inset 0 0 0 6px var(--accent-fill),
+      0 4px 0 0 var(--input-border);
+  image-rendering: pixelated;
+}
+
+input[type=range]:hover::-moz-range-thumb {
+  filter: brightness(1.2);
+  box-shadow: 
+      0 -2px 0 0 var(--text-main), 0 2px 0 0 var(--text-main),
+      -2px 0 0 0 var(--text-main), 2px 0 0 0 var(--text-main),
+      inset -2px -4px 0 0 var(--accent-shadow), 
+      inset 2px 4px 0 0 var(--text-main),
+      inset 0 0 0 4px var(--slider-thumb),
+      inset 0 0 0 6px var(--accent-fill),
+      0 4px 0 0 var(--input-border);
+}
+
+/* --- Pixel Toggle Switch --- */
+
+.toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* The Switch Container */
+.pixel-switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pixel-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The Track (Groove) */
+.track {
+  position: relative;
+  width: 44px;
+  height: 20px;
+  background-color: var(--input-bg);
+  margin-right: 15px;
+  
+  /* Gold Outline (matching slider track) */
+  box-shadow: 
+      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
+      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
+      inset 0 4px 0 0 var(--input-border);
+}
+
+/* The Slider (Handle) */
+.handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--pui-color-18); /* Default "Off" Color */
+  transition: transform 0.1s steps(5); /* Stepped animation for pixel feel */
+  
+  /* Pixel Art Handle Shadowing */
+  box-shadow: 
+      0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
+      -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
+      inset -2px -2px 0 0 var(--input-hover), 
+      inset 2px 2px 0 0 var(--pui-color-26); /* Lighter highlight */
+}
+
+/* Active/Checked Logic */
+input:checked + .track {
+  background-color: var(--input-hover); /* Darker "On" groove */
+}
+
+input:checked + .track .handle {
+  transform: translateX(24px);
+  background-color: var(--slider-thumb); /* "On" Color is Gold/Red */
+  box-shadow: 
+      0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
+      -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
+      inset -2px -2px 0 0 var(--accent-fill), 
+      inset 2px 2px 0 0 var(--pui-color-31); /* Bright highlight when active */
+}
+
+/* Indicator Light (The small pixel on the handle) */
+.handle:after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--input-bg);
+}
+
+input:checked + .track .handle:after {
+  background-color: var(--pui-color-31); /* Bright light when on */
+  box-shadow: 0 0 4px var(--accent-fill); /* Optional: tiny glow */
+}

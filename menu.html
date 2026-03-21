@@ -9,12 +9,14 @@
 <body>
     <div>
     <h1>Menu Test</h1>
+        <button id="theme-toggle" class="btn btn-yellow" style="position: absolute; top: 20px; right: 20px;">Toggle Theme</button>
+        <button class="btn btn-blue" disabled>Continue</button>
         <button class="btn btn-blue">Start Game</button>
         <button class="btn btn-green">Load Game</button>
         <button class="btn btn-yellow">Options</button>
         <button class="btn btn-red">Exit</button>
    </div>
-       <h2 style="margin-bottom: 40px; text-shadow: 2px 2px 0px var(--pui-color-0);">SELECT CLASS</h2>
+       <h2 style="margin-bottom: 40px; text-shadow: 2px 2px 0px var(--text-shadow);">SELECT CLASS</h2>
 
     <div class="pixel-radio-group">
         <label class="pixel-radio">
@@ -34,6 +36,52 @@
             <span class="checkmark"></span>
             <span class="label-text">MAGE</span>
         </label>
+        
+        <label class="pixel-radio">
+            <input type="radio" name="class" disabled>
+            <span class="checkmark"></span>
+            <span class="label-text">NECROMANCER (LOCKED)</span>
+        </label>
     </div> 
+
+    <h2 style="margin-top: 30px; margin-bottom: 20px; text-shadow: 2px 2px 0px var(--text-shadow);">SETTINGS</h2>
+    <div class="pixel-radio-group">
+        <label class="pixel-checkbox">
+            <input type="checkbox">
+            <span class="checkmark"></span>
+            <span class="label-text">HARDCORE MODE</span>
+        </label>
+
+        <label class="pixel-checkbox">
+            <input type="checkbox" disabled checked>
+            <span class="checkmark"></span>
+            <span class="label-text">GOD MODE (LOCKED)</span>
+        </label>
+
+        <label class="pixel-switch">
+            <input type="checkbox" checked>
+            <div class="track">
+                <div class="handle"></div>
+            </div>
+            <span class="label-text">VIBRATION</span>
+        </label>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider-label">
+            <span>MUSIC VOLUME</span>
+            <span>75%</span>
+        </div>
+        <input type="range" min="0" max="100" value="75">
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        toggleBtn.addEventListener('click', () => {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+        });
+    </script>
 </body>
 </html>
