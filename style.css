@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'FFS';
+  src: url('assets/fonts/FFS.ttf');
+}
+
 :root {
   /* Dark Tones (Shadows/Borders) */
   --pui-color-0: #1c1117;   /* [cite: 1] */
@@ -39,3 +44,131 @@
   --pui-color-30: #e3da99;  /* [cite: 2] */
   --pui-color-31: #ffffff;  /* [cite: 2] */
 }
+
+.btn {
+  border: solid transparent;
+  border-image-slice: 4 fill;
+  border-image-width: 8px;
+  color: var(--pui-color-31);
+  padding: 10px 20px;
+  font-family: 'FFS', sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  text-shadow: 2px 2px 0px var(--pui-color-0);
+  transition: transform 0.05s, filter 0.05s;
+}
+
+.btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  filter: brightness(0.9);
+  transform: translateY(2px);
+}
+
+.btn-blue {
+  background-color: transparent;
+  border-image-source: url('assets/buttonblue.svg');
+}
+
+.btn-green {
+  background-color: transparent;
+  border-image-source: url('assets/buttongreen.svg');
+}
+
+.btn-red {
+  background-color: transparent;
+  border-image-source: url('assets/buttonred.svg');
+}
+
+.btn-yellow {
+  background-color: transparent;
+  border-image-source: url('assets/buttonyellow.svg');
+}
+
+      
+
+.pixel-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+        /* The Container */
+.pixel-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+        /* Hide Default Radio */
+.pixel-radio input {
+   position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+        /* The Custom Radio Box (The Socket) */
+.checkmark {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  background-color: var(--pui-color-4); /* Deep recessed area */
+  margin-right: 15px;
+            
+            /* Creating the "Chunky" Pixel Border with Box Shadows */
+            /* Logic: Layering shadows to simulate a 2px stepped outline */
+            box-shadow: 
+                /* Outer Dark Outline */
+                0 -2px 0 0 var(--pui-color-0), 0 2px 0 0 var(--pui-color-0),
+                -2px 0 0 0 var(--pui-color-0), 2px 0 0 0 var(--pui-color-0),
+                /* Inner Shadow (Depth) */
+                inset 0 4px 0 0 rgba(0,0,0,0.4),
+                inset 4px 0 0 0 rgba(0,0,0,0.4);
+        }
+
+        /* Hover State */
+        .pixel-radio:hover .checkmark {
+            background-color: var(--pui-color-10);
+        }
+
+        /* The "Check" (The Gem/Fill) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 4px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--pui-color-21); /* Core color */
+            
+            /* Give the gem a 3D pixel look */
+            box-shadow: 
+                inset -4px -4px 0 0 var(--pui-color-10), /* Bottom shadow */
+                inset 4px 4px 0 0 var(--pui-color-23),   /* Top highlight */
+                0 0 0 2px var(--pui-color-0);            /* Separation from socket */
+        }
+
+        /* Show the check when selected */
+        .pixel-radio input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Special "Active/Selected" glow for the label */
+        .pixel-radio input:checked ~ span {
+            color: var(--pui-color-21);
+            text-shadow: 1.5px 1.5px 0px var(--pui-color-0);
+        }
+
+        .label-text {
+           font-family: 'FFS', sans-serif; 
+           font-size: 24px;
+          transition: color 0.2s;
+        }
