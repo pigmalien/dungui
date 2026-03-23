@@ -169,48 +169,24 @@ body {
         /* The Custom Radio Box (The Socket) */
 .checkmark {
   position: relative;
-  height: 24px;
-  width: 24px;
-  background-color: var(--input-bg);
+  height: 18px;
+  width: 18px;
+  background-image: url('assets/radio0.svg');
+  background-size: contain;
+  image-rendering: pixelated;
   margin-right: 15px;
-            
-            /* Creating the "Chunky" Pixel Border with Box Shadows */
-            /* Logic: Layering shadows to simulate a 2px stepped outline */
-            box-shadow: 
-                /* Outer Dark Outline */
-                0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
-                -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
-                /* Inner Shadow (Depth) */
-                inset 0 2px 0 0 var(--input-border),
-                inset 2px 0 0 0 var(--input-border);
         }
 
         /* Hover State */
         .pixel-radio:hover .checkmark {
             background-color: var(--input-hover);
+            filter: brightness(1.2);
         }
 
         /* The "Check" (The Gem/Fill) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-            left: 4px;
-            top: 4px;
-            width: 16px;
-            height: 16px;
-            background-color: var(--accent-fill);
-            
-            /* Give the gem a 3D pixel look */
-            box-shadow: 
-                inset -2px -2px 0 0 var(--accent-shadow),
-                inset 2px 2px 0 0 var(--accent-highlight),
-                0 0 0 2px var(--input-border);
-        }
-
         /* Show the check when selected */
-        .pixel-radio input:checked ~ .checkmark:after {
-            display: block;
+.pixel-radio input:checked ~ .checkmark {
+            background-image: url('assets/radio1.svg');
         }
 
         /* Special "Active/Selected" glow for the label */
@@ -244,11 +220,14 @@ body {
   width: 0;
 }
 
+.pixel-checkbox .checkmark {
+  background-image: url('assets/uncheckedbox.svg');
+}
+
 .pixel-checkbox:hover .checkmark {
   background-color: var(--input-hover);
 }
 
-/* The X Shape using single 4px element and shadow grid */
 .pixel-checkbox .checkmark::after {
   content: "";
   position: absolute;
@@ -257,6 +236,10 @@ body {
   left: 2px;
   width: 4px;
   height: 4px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--accent-fill);
   box-shadow: 
       4px 4px 0 var(--accent-fill),
@@ -267,6 +250,13 @@ body {
       12px 4px 0 var(--accent-fill),
       4px 12px 0 var(--accent-fill),
       0 16px 0 var(--accent-fill);
+  -webkit-mask-image: url('assets/check1.svg');
+  mask-image: url('assets/check1.svg');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  box-shadow: none;
 }
 
 .pixel-checkbox input:checked ~ .checkmark::after {
@@ -326,22 +316,20 @@ input[type=range]:focus {
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 12px;
-  background: var(--input-bg);
-  box-shadow: 
-      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
-      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
-      inset 0 4px 0 0 var(--input-border);
+  background: transparent;
+  background-image: url('assets/slider1.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   image-rendering: pixelated;
 }
 
 input[type=range]::-moz-range-track {
   width: 100%;
   height: 12px;
-  background: var(--input-bg);
-  box-shadow: 
-      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
-      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
-      inset 0 4px 0 0 var(--input-border);
+  background: transparent;
+  background-image: url('assets/slider1.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 /* --- THE PIXELATED THUMB --- */
@@ -349,67 +337,40 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 24px;
-  width: 16px;
-  background: var(--slider-thumb);
+  width: 6px;
+  background: transparent;
+  background-image: url('assets/thumb1.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-top: -6px;
   border-radius: 0; /* Ensures hard edges */
-  
-  /* Enhanced Pixel Shadowing */
-  box-shadow: 
-      /* Outer Gold Border */
-      0 -2px 0 0 var(--slider-thumb), 0 2px 0 0 var(--slider-thumb),
-      -2px 0 0 0 var(--slider-thumb), 2px 0 0 0 var(--slider-thumb),
-      /* Inner Detail for blocky feel */
-      inset -2px -4px 0 0 var(--accent-shadow), 
-      inset 2px 4px 0 0 var(--text-main),
-      /* Center 'Gem' logic */
-      inset 0 0 0 4px var(--slider-thumb),
-      inset 0 0 0 6px var(--accent-fill),
-      /* Hard edge bottom shadow to simulate weight */
-      0 4px 0 0 var(--input-border);
-  
+  box-shadow: none;
   image-rendering: pixelated;
 }
 
 input[type=range]:hover::-webkit-slider-thumb {
-  filter: brightness(1.2);
-  box-shadow: 
-      0 -2px 0 0 var(--text-main), 0 2px 0 0 var(--text-main),
-      -2px 0 0 0 var(--text-main), 2px 0 0 0 var(--text-main),
-      inset -2px -4px 0 0 var(--accent-shadow), 
-      inset 2px 4px 0 0 var(--text-main),
-      inset 0 0 0 4px var(--slider-thumb),
-      inset 0 0 0 6px var(--accent-fill),
-      0 4px 0 0 var(--input-border);
+  box-shadow: none;
+  filter: brightness(1.1);
 }
 
 input[type=range]::-moz-range-thumb {
   height: 24px;
-  width: 16px;
-  background: var(--slider-thumb);
+  width: 6px;
+  background: transparent;
+  background-image: url('assets/thumb1.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border: none;
   border-radius: 0;
-  box-shadow: 
-      0 -2px 0 0 var(--slider-thumb), 0 2px 0 0 var(--slider-thumb),
-      -2px 0 0 0 var(--slider-thumb), 2px 0 0 0 var(--slider-thumb),
-      inset -2px -4px 0 0 var(--accent-shadow), 
-      inset 2px 4px 0 0 var(--text-main),
-      inset 0 0 0 4px var(--slider-thumb),
-      inset 0 0 0 6px var(--accent-fill),
-      0 4px 0 0 var(--input-border);
+  box-shadow: none;
   image-rendering: pixelated;
 }
 
 input[type=range]:hover::-moz-range-thumb {
-  filter: brightness(1.2);
-  box-shadow: 
-      0 -2px 0 0 var(--text-main), 0 2px 0 0 var(--text-main),
-      -2px 0 0 0 var(--text-main), 2px 0 0 0 var(--text-main),
-      inset -2px -4px 0 0 var(--accent-shadow), 
-      inset 2px 4px 0 0 var(--text-main),
-      inset 0 0 0 4px var(--slider-thumb),
-      inset 0 0 0 6px var(--accent-fill),
-      0 4px 0 0 var(--input-border);
+  box-shadow: none;
+  filter: brightness(1.1);
 }
 
 /* --- Pixel Toggle Switch --- */
@@ -438,63 +399,31 @@ input[type=range]:hover::-moz-range-thumb {
 /* The Track (Groove) */
 .track {
   position: relative;
-  width: 44px;
-  height: 20px;
-  background-color: var(--input-bg);
+  width: 33px;
+  height: 16px;
+  background-image: url('assets/slider2.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
   margin-right: 15px;
-  
-  /* Gold Outline (matching slider track) */
-  box-shadow: 
-      0 -2px 0 0 var(--slider-track-border), 0 2px 0 0 var(--slider-track-border),
-      -2px 0 0 0 var(--slider-track-border), 2px 0 0 0 var(--slider-track-border),
-      inset 0 4px 0 0 var(--input-border);
 }
 
 /* The Slider (Handle) */
 .handle {
   position: absolute;
-  top: 2px;
+  top:2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
-  background-color: var(--pui-color-18); /* Default "Off" Color */
+  width: 12px;
+  height: 14px;
+  background-color: transparent;
+  background-image: url('assets/toggle1.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
   transition: transform 0.1s steps(5); /* Stepped animation for pixel feel */
-  
-  /* Pixel Art Handle Shadowing */
-  box-shadow: 
-      0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
-      -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
-      inset -2px -2px 0 0 var(--input-hover), 
-      inset 2px 2px 0 0 var(--pui-color-26); /* Lighter highlight */
+  border-radius: 0 !important;
 }
 
 /* Active/Checked Logic */
-input:checked + .track {
-  background-color: var(--input-hover); /* Darker "On" groove */
-}
-
 input:checked + .track .handle {
-  transform: translateX(24px);
-  background-color: var(--slider-thumb); /* "On" Color is Gold/Red */
-  box-shadow: 
-      0 -2px 0 0 var(--input-border), 0 2px 0 0 var(--input-border),
-      -2px 0 0 0 var(--input-border), 2px 0 0 0 var(--input-border),
-      inset -2px -2px 0 0 var(--accent-fill), 
-      inset 2px 2px 0 0 var(--pui-color-31); /* Bright highlight when active */
-}
-
-/* Indicator Light (The small pixel on the handle) */
-.handle:after {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  width: 4px;
-  height: 4px;
-  background-color: var(--input-bg);
-}
-
-input:checked + .track .handle:after {
-  background-color: var(--pui-color-31); /* Bright light when on */
-  box-shadow: 0 0 4px var(--accent-fill); /* Optional: tiny glow */
+  transform: translateX(8px);
 }
