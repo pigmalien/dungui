@@ -427,3 +427,25 @@ input[type=range]:hover::-moz-range-thumb {
 input:checked + .track .handle {
   transform: translateX(8px);
 }
+
+/* --- Pixel Content Box --- */
+
+.pixel-box {
+  background-color: transparent;
+  border: 10px solid transparent;
+  border-image-source: url('assets/box1.svg');
+  border-image-slice: 5 fill;
+  border-image-width: 10px;
+  padding: 15px;
+  image-rendering: pixelated;
+}
+
+.pixel-box-2 {
+  background-color: transparent;
+  border: 12px solid transparent;
+  border-image-source: url('assets/box2.svg');
+  border-image-slice: 6 fill;
+  border-image-width: 12px;
+  padding: 15px;
+  image-rendering: pixelated;
+}
