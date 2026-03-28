@@ -438,6 +438,7 @@ input:checked + .track .handle {
   border-image-width: 10px;
   padding: 15px;
   image-rendering: pixelated;
+  color: var(--pui-color-28);
 }
 
 .pixel-box-2 {
@@ -448,4 +449,126 @@ input:checked + .track .handle {
   border-image-width: 12px;
   padding: 15px;
   image-rendering: pixelated;
+  color: var(--pui-color-0);
+}
+
+.pixel-panel-top {
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 8px solid transparent;
+  border-image-source: url('assets/combotop1.svg');
+  border-image-slice: 8 fill;
+  border-image-width: 16px;
+  padding: 15px;
+  image-rendering: pixelated;
+  color: var(--pui-color-0);
+}
+
+.pixel-panel-base {
+  background-color: transparent;
+  border: 16px solid transparent;
+  border-image-source: url('assets/combobase1.svg');
+  border-image-slice: 8 fill;
+  border-image-width: 16px;
+  padding: 15px;
+  image-rendering: pixelated;
+  color: var(--pui-color-0);
+}
+
+/* --- Pixel Progress Bar --- */
+
+.pixel-progress {
+  width: 100%;
+  height: 32px;
+  background-color: transparent;
+  border: 8px solid transparent;
+  border-image-source: url('assets/progressbar1.svg');
+  border-image-slice: 4 fill;
+  border-image-width: 12px;
+  image-rendering: pixelated;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  display: flex;
+}
+
+.pixel-progress-fill {
+  height: 100%;
+  background-color: var(--accent-fill);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* --- Pixel Accordion --- */
+
+.pixel-accordion {
+  display: block;
+}
+
+.pixel-accordion summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  outline-style: none;
+  font-family: 'FFS', sans-serif;
+  font-size: 22px;
+  user-select: none;
+}
+
+.pixel-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.pixel-accordion .indicator {
+  width: 24px;
+  height: 24px;
+  background-image: url('assets/chevron1.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  transition: transform 0.20s steps(6);
+}
+
+.pixel-accordion[open] .indicator {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  margin-top: 0;
+}
+
+ul.pixel-panel-base {
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+}
+
+.pixel-panel {
+  background-color: transparent;
+  border: 12px solid transparent;
+  border-image-source: url('assets/panel1.svg');
+  border-image-slice: 6 fill;
+  border-image-width: 12px;
+  padding: 15px;
+  image-rendering: pixelated;
+  color: var(--pui-color-0);
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pui-color-10) var(--pui-color-2);
+}
+
+/* Custom Pixel Scrollbar */
+.pixel-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pixel-panel::-webkit-scrollbar-track {
+  background: var(--pui-color-2);
+}
+
+.pixel-panel::-webkit-scrollbar-thumb {
+  background: var(--pui-color-10);
+  border: 2px solid var(--pui-color-0);
 }

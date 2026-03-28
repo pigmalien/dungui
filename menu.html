@@ -75,6 +75,16 @@
         <input type="range" min="0" max="100" value="75">
     </div>
 
+<div style="width: 300px; margin: 20px;">
+  <p class="label-text">Loading Assets...</p>
+  <div class="pixel-progress">
+    <!-- Adjust width percentage to change progress level -->
+    <div class="pixel-progress-fill" style="width: 65%;"></div>
+  </div>
+</div>
+
+
+
     <div class="pixel-box" style="margin-top: 30px; max-width: 350px;">
         <h3 class="label-text" style="margin-top: 0;">QUEST LOG</h3>
         <p style="font-family: sans-serif; line-height: 1.4;">Find the missing pixel in the stylesheet.<br>Reward: 500 Gold</p>
@@ -84,6 +94,36 @@
         <h3 class="label-text" style="margin-top: 0;">INVENTORY</h3>
         <p style="font-family: sans-serif; line-height: 1.4;">Check your items and equipment.<br>Capacity: 12/20</p>
     </div>
+
+<details class="pixel-accordion" style="margin-top: 30px; max-width: 350px;">
+  <summary class="pixel-panel-top">
+    Character Stats
+    <div class="indicator"></div>
+  </summary>
+  <div class="accordion-content">
+    <ul class="pixel-panel-base">
+      <li>Strength: 15</li>
+      <li>Agility: 12</li>
+      <li>Intelligence: 8</li>
+    </ul>
+  </div>
+</details>
+
+<div class="pixel-panel" style="margin-top: 30px; max-width: 350px;">
+    <h3 class="label-text" style="margin-top: 0; position: sticky; top: -15px; background: inherit; padding-bottom: 5px;">STORAGE</h3>
+    <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.6;">
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Iron Sword</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Wooden Shield</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Health Potion x5</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Mana Potion x2</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Leather Boots</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Rusty Key</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Dragon Scale</li>
+        <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Old Map</li>
+        <li style="padding: 5px 0;">• Smoke Bomb</li>
+    </ul>
+</div>
+
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
