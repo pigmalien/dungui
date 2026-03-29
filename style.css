@@ -43,6 +43,7 @@
   --pui-color-29: #ddd5c1;  /* [cite: 2] */
   --pui-color-30: #e3da99;  /* [cite: 2] */
   --pui-color-31: #ffffff;  /* [cite: 2] */
+  --pui-color-32: #d3bfa9;  /* [cite: 2] */
 
   /* Semantic Variables (Default Dark Mode) */
   --bg-body: var(--pui-color-1);
@@ -83,6 +84,7 @@ body {
   background-color: var(--bg-body);
   color: var(--text-main);
   transition: background-color 0.3s, color 0.3s;
+  cursor: url('assets/cursor_pointer.png'), auto;
 }
 
 .btn {
@@ -93,7 +95,7 @@ body {
   padding: 10px 20px;
   font-family: 'FFS', sans-serif;
   font-size: 20px;
-  cursor: pointer;
+  cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
   text-shadow: 2px 2px 0px var(--pui-color-0);
@@ -154,7 +156,7 @@ body {
 .pixel-radio {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: url('assets/cursor_glove.png'), pointer;
   user-select: none;
   position: relative;
 }
@@ -206,7 +208,7 @@ body {
 .pixel-checkbox {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: url('assets/cursor_glove.png'), pointer;
   user-select: none;
   position: relative;
   margin-top: 10px;
@@ -385,7 +387,7 @@ input[type=range]:hover::-moz-range-thumb {
 .pixel-switch {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: url('assets/cursor_glove.png'), pointer;
   user-select: none;
 }
 
@@ -509,7 +511,7 @@ input:checked + .track .handle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  cursor: url('assets/cursor_glove.png'), pointer;
   outline-style: none;
   font-family: 'FFS', sans-serif;
   font-size: 22px;
@@ -545,7 +547,7 @@ ul.pixel-panel-base {
 }
 
 .pixel-panel {
-  background-color: transparent;
+  background-color: solid transparent;
   border: 12px solid transparent;
   border-image-source: url('assets/panel1.svg');
   border-image-slice: 6 fill;
@@ -571,4 +573,185 @@ ul.pixel-panel-base {
 .pixel-panel::-webkit-scrollbar-thumb {
   background: var(--pui-color-10);
   border: 2px solid var(--pui-color-0);
+}
+
+/* --- Pixel Text Inputs --- */
+.pixel-input {
+  background-color: var(--input-bg);
+  border: 4px solid var(--input-border);
+  color: var(--text-main);
+  padding: 8px 12px;
+  font-family: 'FFS', sans-serif;
+  font-size: 18px;
+  outline: none;
+  image-rendering: pixelated;
+  box-shadow: inset -2px -2px 0px rgba(0,0,0,0.2), inset 2px 2px 0px rgba(255,255,255,0.1);
+}
+
+.pixel-input:focus {
+  border-color: var(--accent-fill);
+}
+
+/* --- Inventory Slots --- */
+.pixel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 8px;
+}
+
+.pixel-slot {
+  width: 48px;
+  height: 48px;
+  background-color: var(--pui-color-2);
+  border: 4px solid var(--pui-color-0);
+  image-rendering: pixelated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: url('assets/cursor_sword.png'), auto;
+  position: relative;
+  box-shadow: inset -4px -4px 0px rgba(0,0,0,0.3);
+}
+
+.pixel-slot:hover {
+  background-color: var(--pui-color-8);
+}
+
+.pixel-slot.active {
+  border-color: var(--pui-color-30);
+}
+
+/* --- Tooltips --- */
+.pixel-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.pixel-tooltip .tooltip-text {
+  visibility: hidden;
+  width: 140px;
+  background-color: var(--pui-color-1);
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border: 4px solid var(--pui-color-31);
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -70px;
+  font-size: 14px;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.pixel-tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+/* --- Badges/Labels --- */
+.pixel-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: 'FFS', sans-serif;
+  font-size: 14px;
+  background-color: var(--pui-color-14);
+  color: white;
+  border: 2px solid var(--pui-color-0);
+  text-transform: uppercase;
+}
+
+/* --- Tab Navigation --- */
+.pixel-tabs {
+  display: flex;
+  gap: 0px;
+  margin-bottom: -16px; /* Overlap with panel border */
+  position: relative;
+  z-index: 2;
+  padding-left: 12px;
+}
+
+.pixel-tab {
+  background-color: transparent;
+  border: 12px solid transparent;
+  border-image-source: url('assets/inactivetab1.svg');
+  border-image-slice: 6 6 0 6 fill;
+  border-image-width: 12px;
+  color: var(--pui-color-25);
+  padding: 8px 16px;
+  font-family: 'FFS', sans-serif;
+  font-size: 16px;
+  cursor: url('assets/cursor_glove.png'), pointer;
+  image-rendering: pixelated;
+  text-shadow: 2px 2px 0px var(--pui-color-0);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.pixel-tab:hover {
+  filter: brightness(1.1);
+}
+
+.pixel-tab.active {
+  border-image-source: url('assets/activetab1.svg');
+  border-image-slice: 6 6 0 6 fill;
+  color: var(--pui-color-31);
+  z-index: 3;
+}
+
+/* --- Status Bars (Variants) --- */
+.pixel-progress-red .pixel-progress-fill { background-color: var(--pui-color-14); }
+.pixel-progress-blue .pixel-progress-fill { background-color: var(--pui-color-22); }
+
+/* --- Toast Notifications --- */
+.pixel-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--pui-color-1);
+  border: 8px solid transparent;
+  border-image-source: url('assets/panel1.svg');
+  border-image-slice: 6 fill;
+  border-image-width: 8px;
+  color: white;
+  padding: 10px 20px;
+  z-index: 2000;
+  image-rendering: pixelated;
+  animation: pixelSlideIn 0.3s steps(4);
+  display: none;
+}
+
+@keyframes pixelSlideIn {
+  from { transform: translateX(120%); }
+  to { transform: translateX(0); }
+}
+
+/* --- Cursors --- */
+.cursor-glove { cursor: url('assets/cursor_glove.png'), auto; }
+.cursor-sword { cursor: url('assets/cursor_sword.png'), auto; }
+.cursor-pointer { cursor: url('assets/cursor_pointer.png'), auto; }
+
+/* --- Modal Overlay --- */
+.pixel-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
+}
+
+.pixel-modal {
+  max-width: 400px;
+  background-color: var(--pui-color-1);
+  border: 12px solid transparent;
+  border-image-source: url('assets/panel1.svg');
+  border-image-slice: 6 fill;
+  padding: 20px;
+  text-align: center;
 }

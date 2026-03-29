@@ -7,15 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-    <h1>Menu Test</h1>
+    <div style="padding: 20px;">
+        <h1 class="text-pixel-shadow">HERO MENU</h1>
         <button id="theme-toggle" class="btn btn-yellow" style="position: absolute; top: 20px; right: 20px;">Toggle Theme</button>
-        <button class="btn btn-blue" disabled>Continue</button>
-        <button class="btn btn-blue">Start Game</button>
-        <button class="btn btn-green">Load Game</button>
-        <button class="btn btn-yellow">Options</button>
-        <button class="btn btn-red">Exit</button>
-   </div>
+        <button id="toast-trigger" class="btn btn-blue" style="position: absolute; top: 80px; right: 20px;">Show Toast</button>
+        <button id="modal-trigger" class="btn btn-green" style="position: absolute; top: 140px; right: 20px;">Open Modal</button>
+
+        <div style="margin-bottom: 30px;">
+            <p class="label-text">CHARACTER NAME:</p>
+            <input type="text" class="pixel-input" placeholder="Enter Name..." value="Japig">
+        </div>
+
+        <div class="pixel-tabs">
+            <div class="pixel-tab active">INVENTORY</div>
+            <div class="pixel-tab">SKILLS</div>
+            <div class="pixel-tab">MAP</div>
+        </div>
+
+   <div class="pixel-panel" style="max-width: 500px; max-height: none;">
        <h2 style="margin-bottom: 40px; text-shadow: 2px 2px 0px var(--text-shadow);">SELECT CLASS</h2>
 
     <div class="pixel-radio-group">
@@ -43,6 +52,35 @@
             <span class="label-text">NECROMANCER (LOCKED)</span>
         </label>
     </div> 
+    </div>
+
+    <div style="margin-top: 30px; max-width: 350px;">
+        <div class="slider-label"><span>HEALTH</span><span>100/100</span></div>
+        <div class="pixel-progress pixel-progress-red">
+            <div class="pixel-progress-fill" style="width: 100%;"></div>
+        </div>
+        
+        <div class="slider-label" style="margin-top: 15px;"><span>MANA</span><span>45/100</span></div>
+        <div class="pixel-progress pixel-progress-blue">
+            <div class="pixel-progress-fill" style="width: 45%;"></div>
+        </div>
+    </div>
+
+    <h2 style="margin-top: 30px; margin-bottom: 20px; text-shadow: 2px 2px 0px var(--text-shadow);">INVENTORY</h2>
+    <div class="pixel-grid" style="max-width: 300px;">
+        <div class="pixel-slot active pixel-tooltip">
+            <span style="font-size: 24px;">⚔️</span>
+            <span class="tooltip-text">IRON SWORD<br><span style="color: #4b7734;">+5 DMG</span></span>
+        </div>
+        <div class="pixel-slot"><span style="font-size: 24px;">🛡️</span></div>
+        <div class="pixel-slot pixel-tooltip">
+            <span style="font-size: 24px;">🧪</span>
+            <span class="tooltip-text">HEALTH POTION<br><span style="color: var(--pui-color-14);">Restores 50 HP</span></span>
+        </div>
+        <div class="pixel-slot"></div>
+        <div class="pixel-slot"></div>
+        <div class="pixel-slot"></div>
+    </div>
 
     <h2 style="margin-top: 30px; margin-bottom: 20px; text-shadow: 2px 2px 0px var(--text-shadow);">SETTINGS</h2>
     <div class="pixel-radio-group">
@@ -110,7 +148,7 @@
 </details>
 
 <div class="pixel-panel" style="margin-top: 30px; max-width: 350px;">
-    <h3 class="label-text" style="margin-top: 0; position: sticky; top: -15px; background: inherit; padding-bottom: 5px;">STORAGE</h3>
+    <h3 class="label-text" style="margin-top: 0; position: sticky; top: -15px; background-color: var(--pui-color-32); padding-bottom: 5px;">STORAGE</h3>
     <ul style="list-style: none; padding: 0; margin: 0; font-family: sans-serif; line-height: 1.6;">
         <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Iron Sword</li>
         <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Wooden Shield</li>
@@ -124,6 +162,19 @@
     </ul>
 </div>
 
+    <div id="demo-toast" class="pixel-toast">
+        <span class="pixel-badge">NEW</span>
+        <span style="margin-left: 10px; font-family: 'FFS', sans-serif;">Item Picked Up!</span>
+    </div>
+
+    <div id="demo-modal" class="pixel-modal-backdrop">
+        <div class="pixel-modal">
+            <h2 class="text-pixel-shadow">SYSTEM MODAL</h2>
+            <p style="font-family: 'FFS', sans-serif; margin: 20px 0;">This is a Dungui Modal component. It uses the panel image slice for its border and an overlay backdrop.</p>
+            <button id="modal-close" class="btn btn-red">CLOSE</button>
+        </div>
+    </div>
+
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
@@ -132,6 +183,19 @@
             const currentTheme = html.getAttribute('data-theme');
             html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
         });
+
+        const toastBtn = document.getElementById('toast-trigger');
+        const toast = document.getElementById('demo-toast');
+        toastBtn.addEventListener('click', () => {
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        });
+
+        const modalBtn = document.getElementById('modal-trigger');
+        const modal = document.getElementById('demo-modal');
+        const closeBtn = document.getElementById('modal-close');
+        modalBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+        closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
     </script>
 </body>
 </html>
