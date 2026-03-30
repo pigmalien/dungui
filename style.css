@@ -3,6 +3,12 @@
   src: url('assets/fonts/FFS.ttf');
 }
 
+@font-face {
+  font-family: 'ManaRoot';
+  /* Replace 'PixelBody.ttf' with the actual filename in your fonts folder */
+  src: url('assets/fonts/ManaRoot.ttf');
+}
+
 :root {
   /* Dark Tones (Shadows/Borders) */
   --pui-color-0: #1c1117;   /* [cite: 1] */
@@ -432,6 +438,12 @@ input:checked + .track .handle {
 
 /* --- Pixel Content Box --- */
 
+p, li {
+  font-family: 'PixelBody', sans-serif;
+  -webkit-font-smoothing: none;
+  line-height: 1.4;
+}
+
 .pixel-box {
   background-color: transparent;
   border: 10px solid transparent;
@@ -444,11 +456,12 @@ input:checked + .track .handle {
 }
 
 .pixel-box-2 {
+  box-sizing: border-box;
   background-color: transparent;
-  border: 12px solid transparent;
+  border: 16px solid transparent;
   border-image-source: url('assets/box2.svg');
   border-image-slice: 6 fill;
-  border-image-width: 12px;
+  border-image-width: 16px;
   padding: 15px;
   image-rendering: pixelated;
   color: var(--pui-color-0);
