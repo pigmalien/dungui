@@ -1,12 +1,36 @@
 @font-face {
-  font-family: 'FFS';
-  src: url('assets/fonts/FFS.ttf');
+  font-family: 'PressStart2P';
+  src: url('assets/fonts/PressStart2p-Regular.ttf');
 }
 
 @font-face {
-  font-family: 'ManaRoot';
-  /* Replace 'PixelBody.ttf' with the actual filename in your fonts folder */
-  src: url('assets/fonts/ManaRoot.ttf');
+  font-family: 'DungeonFont';
+  src: url('assets/fonts/DungeonFont.ttf');
+}
+
+@font-face {
+  font-family: 'FSEX302';
+  src: url('assets/fonts/FSEX302.ttf');
+}
+
+h1 { 
+  font-family: 'DungeonFont', sans-serif;
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+h2 { 
+  font-family: 'PressStart2P';
+  display: block;
+  font-size: 1em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 :root {
@@ -54,7 +78,7 @@
   /* Semantic Variables (Default Dark Mode) */
   --bg-body: var(--pui-color-1);
   --text-main: var(--pui-color-31);
-  --text-shadow: var(--pui-color-0);
+  --text-shadow: var(--pui-color-20);
 
   --input-bg: var(--pui-color-4);
   --input-border: var(--pui-color-0);
@@ -99,12 +123,20 @@ body {
   border-image-width: 8px;
   color: var(--pui-color-31); /* Buttons keep white text in both modes */
   padding: 10px 20px;
-  font-family: 'FFS', sans-serif;
-  font-size: 20px;
+  font-family: 'DungeonFont', sans-serif;
+  font-size: 24px;
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
-  text-shadow: 2px 2px 0px var(--pui-color-0);
+    text-shadow: 
+    2px 0 0 var(--pui-color-0), 
+    -2px 0 0 var(--pui-color-0), 
+    0 2px 0 var(--pui-color-0), 
+    0 -2px 0 var(--pui-color-0),
+    2px 2px 0 var(--pui-color-0), 
+    -2px -2px 0 var(--pui-color-0), 
+    2px -2px 0 var(--pui-color-0), 
+    -2px 2px 0 var(--pui-color-0);
   transition: transform 0.05s, filter 0.05s;
 }
 
@@ -204,8 +236,8 @@ body {
         }
 
         .label-text {
-           font-family: 'FFS', sans-serif; 
-           font-size: 24px;
+           font-family: 'FSEX302', sans-serif; 
+           font-size: 20px;
           transition: color 0.2s;
         }
 
@@ -300,7 +332,7 @@ body {
 .slider-label {
   display: flex;
   justify-content: space-between;
-  font-family: 'FFS', sans-serif;
+  font-family: 'FSEX302', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
   text-shadow: 2px 2px 0px var(--text-shadow);
@@ -526,7 +558,7 @@ p, li {
   align-items: center;
   cursor: url('assets/cursor_glove.png'), pointer;
   outline-style: none;
-  font-family: 'FFS', sans-serif;
+  font-family: 'FSEX302', sans-serif;
   font-size: 22px;
   user-select: none;
 }
@@ -594,7 +626,7 @@ ul.pixel-panel-base {
   border: 4px solid var(--input-border);
   color: var(--text-main);
   padding: 8px 12px;
-  font-family: 'FFS', sans-serif;
+  font-family: 'FSEX302', sans-serif;
   font-size: 18px;
   outline: none;
   image-rendering: pixelated;
@@ -666,7 +698,7 @@ ul.pixel-panel-base {
 .pixel-badge {
   display: inline-block;
   padding: 2px 8px;
-  font-family: 'FFS', sans-serif;
+  font-family: 'FSEX302', sans-serif;
   font-size: 14px;
   background-color: var(--pui-color-14);
   color: white;
@@ -692,7 +724,7 @@ ul.pixel-panel-base {
   border-image-width: 12px;
   color: var(--pui-color-25);
   padding: 8px 16px;
-  font-family: 'FFS', sans-serif;
+  font-family: 'FSEX302', sans-serif;
   font-size: 16px;
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
@@ -743,6 +775,15 @@ ul.pixel-panel-base {
 .cursor-glove { cursor: url('assets/cursor_glove.png'), auto; }
 .cursor-sword { cursor: url('assets/cursor_sword.png'), auto; }
 .cursor-pointer { cursor: url('assets/cursor_pointer.png'), auto; }
+
+/* --- Tab Content --- */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
 
 /* --- Modal Overlay --- */
 .pixel-modal-backdrop {
