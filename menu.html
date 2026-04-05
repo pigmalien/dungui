@@ -8,7 +8,7 @@
 </head>
 <body>
     <div style="padding: 20px;">
-        <h1 class="text-pixel-shadow";>HERO MENU</h1>
+        <h1 class="text-pixel-shadow">HERO MENU</h1>
         <button id="theme-toggle" class="btn btn-yellow" style="position: absolute; top: 20px; right: 20px;">Toggle Theme</button>
         <button id="toast-trigger" class="btn btn-blue" style="position: absolute; top: 80px; right: 20px;">Show Toast</button>
         <button id="modal-trigger" class="btn btn-green" style="position: absolute; top: 140px; right: 20px;">Open Modal</button>
@@ -26,17 +26,54 @@
 
         <div id="inventory" class="tab-content active">
             <div class="pixel-panel" style="max-width: 350px; max-height: none;">
-                <h2 style="margin-bottom: 20px; text-shadow: 2px 2px 0px var(--text-shadow);">INVENTORY</h2>
+                <h2 class="text-pixel-shadow" style="margin-bottom: 20px;">INVENTORY</h2>
                 <div class="pixel-grid" style="max-width: 300px;">
                     <div class="pixel-slot active pixel-tooltip">
-                        <span style="font-size: 24px;">⚔️</span>
+                         <svg class="pixel-icon">
+                            <use href="assets/pixel-spritesheet.svg#long_sword"></use>
+                        </svg>
                         <span class="tooltip-text">IRON SWORD<br><span style="color: #4b7734;">+5 DMG</span></span>
                     </div>
-                    <div class="pixel-slot"><span style="font-size: 24px;">🛡️</span></div>
+                    <div class="pixel-slot">
+                        <svg class="pixel-icon"><use href="assets/pixel-spritesheet.svg#heater_shield"></use></svg>
+                    </div>
                     <div class="pixel-slot pixel-tooltip">
-                        <span style="font-size: 24px;">🧪</span>
+                        <svg class="pixel-icon"><use href="assets/pixel-spritesheet.svg#flask_full"></use></svg>
                         <span class="tooltip-text">HEALTH POTION<br><span style="color: var(--pui-color-14);">Restores 50 HP</span></span>
                     </div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
+                    <div class="pixel-slot"></div>
                     <div class="pixel-slot"></div>
                     <div class="pixel-slot"></div>
                     <div class="pixel-slot"></div>
@@ -45,8 +82,8 @@
         </div>
 
         <div id="skills" class="tab-content">
-            <div class="pixel-panel" style="max-width: 500px; max-height: none;">
-                <h2 style="margin-bottom: 40px; text-shadow: 2px 2px 0px var(--text-shadow);">SELECT CLASS</h2>
+            <div class="pixel-panel" style="max-width: 350px; max-height: none;">
+                <h2 class="text-pixel-shadow" style="margin-bottom: 40px;">SELECT CLASS</h2>
                 <div class="pixel-radio-group">
                     <label class="pixel-radio"><input type="radio" checked="checked" name="class"><span class="checkmark"></span><span class="label-text">WARRIOR</span></label>
                     <label class="pixel-radio"><input type="radio" name="class"><span class="checkmark"></span><span class="label-text">PALADIN</span></label>
@@ -57,8 +94,8 @@
         </div>
 
         <div id="map" class="tab-content">
-            <div class="pixel-panel" style="max-width: 500px; max-height: none;">
-                <h2 style="text-shadow: 2px 2px 0px var(--text-shadow);">WORLD MAP</h2>
+            <div class="pixel-panel" style="max-width: 350px; max-height: none;">
+                <h2 class="text-pixel-shadow">WORLD MAP</h2>
                 <p class="label-text">The map is currently shrouded in fog...</p>
             </div>
         </div>
@@ -75,7 +112,7 @@
         </div>
     </div>
 
-    <h2 style="margin-top: 30px; margin-bottom: 20px; text-shadow: 2px 2px 0px var(--text-shadow);">SETTINGS</h2>
+    <h2 class="text-pixel-shadow" style="margin-top: 30px; margin-bottom: 20px;">SETTINGS</h2>
     <div class="pixel-radio-group">
         <label class="pixel-checkbox">
             <input type="checkbox">

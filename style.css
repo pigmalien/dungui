@@ -25,6 +25,7 @@ h1 {
 
 h2 { 
   font-family: 'PressStart2P';
+  color: var(--pui-color-31);
   display: block;
   font-size: 1em;
   margin-top: 0.67em;
@@ -45,7 +46,7 @@ h2 {
   /* Mid Tones */
   --pui-color-6: #2b3154;   /* [cite: 1] */
   --pui-color-7: #6d2324;   /* [cite: 1] */
-  --pui-color-8: #4f3740;   /* [cite: 1] */
+  --pui-color-8: #483b3a;   /* [cite: 1] */
   --pui-color-9: #354628;   /* [cite: 1] */
   --pui-color-10: #60452b;  /* [cite: 1] */
   --pui-color-11: #803d37;  /* [cite: 1] */
@@ -66,7 +67,7 @@ h2 {
 
   /* Light Tones (Paper/Highlights) */
   --pui-color-24: #8b9c68;  /* [cite: 2] */
-  --pui-color-25: #9d958e;  /* [cite: 2] */
+  --pui-color-25: #aa8d7a;  /* [cite: 2] */
   --pui-color-26: #c19b6f;  /* [cite: 2] */
   --pui-color-27: #8db8cd;  /* [cite: 2] */
   --pui-color-28: #cdb046;  /* [cite: 2] */
@@ -90,12 +91,23 @@ h2 {
 
   --slider-track-border: var(--pui-color-28);
   --slider-thumb: var(--pui-color-28);
+
+  /* Reusable Pixel Outline */
+  --pui-shadow-outline: 
+    2px 0 0 var(--pui-color-0), 
+    -2px 0 0 var(--pui-color-0), 
+    0 2px 0 var(--pui-color-0), 
+    0 -2px 0 var(--pui-color-0),
+    2px 2px 0 var(--pui-color-0), 
+    -2px -2px 0 var(--pui-color-0), 
+    2px -2px 0 var(--pui-color-0), 
+    -2px 2px 0 var(--pui-color-0);
 }
 
 /* Light Mode Overrides */
 [data-theme="light"] {
   --bg-body: var(--pui-color-29); /* Parchment color */
-  --text-main: var(--pui-color-4); /* Dark ink text */
+  --text-main: var(--pui-color-31); /* Dark ink text */
   --text-shadow: rgba(0,0,0,0.1);
 
   --input-bg: var(--pui-color-31); /* White paper inputs */
@@ -108,6 +120,11 @@ h2 {
 
   --slider-track-border: var(--pui-color-14);
   --slider-thumb: var(--pui-color-14);
+}
+
+/* Utility Class for Pixel Shadow */
+.text-pixel-shadow {
+  text-shadow: var(--pui-shadow-outline);
 }
 
 body {
@@ -128,15 +145,7 @@ body {
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
-    text-shadow: 
-    2px 0 0 var(--pui-color-0), 
-    -2px 0 0 var(--pui-color-0), 
-    0 2px 0 var(--pui-color-0), 
-    0 -2px 0 var(--pui-color-0),
-    2px 2px 0 var(--pui-color-0), 
-    -2px -2px 0 var(--pui-color-0), 
-    2px -2px 0 var(--pui-color-0), 
-    -2px 2px 0 var(--pui-color-0);
+  text-shadow: var(--pui-shadow-outline);
   transition: transform 0.05s, filter 0.05s;
 }
 
@@ -232,7 +241,7 @@ body {
         /* Special "Active/Selected" glow for the label */
         .pixel-radio input:checked ~ span {
             color: var(--accent-fill);
-            text-shadow: 1.5px 1.5px 0px var(--text-shadow);
+            text-shadow: var(--pui-shadow-outline);
         }
 
         .label-text {
@@ -306,7 +315,7 @@ body {
 /* Active state for label */
 .pixel-checkbox input:checked ~ span {
   color: var(--accent-fill);
-  text-shadow: 1.5px 1.5px 0px var(--text-shadow);
+  text-shadow: var(--pui-shadow-outline);
 }
 
 /* Disabled State */
@@ -335,7 +344,7 @@ body {
   font-family: 'FSEX302', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 0px var(--text-shadow);
+  text-shadow: var(--pui-shadow-outline);
   color: var(--text-main);
 }
 
@@ -640,30 +649,45 @@ ul.pixel-panel-base {
 /* --- Inventory Slots --- */
 .pixel-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, 24px);
+
+  background-image: url('assets/slotb.svg');
+  background-repeat: repeat;
+  background-size: 24px 24px;
+  image-rendering: pixelated;
 }
 
 .pixel-slot {
-  width: 48px;
-  height: 48px;
-  background-color: var(--pui-color-2);
-  border: 4px solid var(--pui-color-0);
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+
   image-rendering: pixelated;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: url('assets/cursor_sword.png'), auto;
   position: relative;
-  box-shadow: inset -4px -4px 0px rgba(0,0,0,0.3);
 }
 
 .pixel-slot:hover {
-  background-color: var(--pui-color-8);
+  background-color: var(--pui-color-25);
 }
 
 .pixel-slot.active {
-  border-color: var(--pui-color-30);
+  border: 1px solid var(--pui-color-8);
+  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* --- Spritesheet Icons --- */
+.pixel-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--pui-color-8);
+  fill: currentColor;
+  image-rendering: pixelated;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* --- Tooltips --- */
@@ -728,7 +752,7 @@ ul.pixel-panel-base {
   font-size: 16px;
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
-  text-shadow: 2px 2px 0px var(--pui-color-0);
+  text-shadow: var(--pui-shadow-outline);
   text-transform: uppercase;
   user-select: none;
 }
