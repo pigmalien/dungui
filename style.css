@@ -110,7 +110,7 @@ h2 {
   --text-main: var(--pui-color-31); /* Dark ink text */
   --text-shadow: rgba(0,0,0,0.1);
 
-  --input-bg: var(--pui-color-31); /* White paper inputs */
+  --input-bg: var(--pui-color-25); /* White paper inputs */
   --input-border: var(--pui-color-10); /* Brown borders */
   --input-hover: var(--pui-color-26);
 
@@ -124,7 +124,7 @@ h2 {
 
 /* Utility Class for Pixel Shadow */
 .text-pixel-shadow {
-  text-shadow: var(--pui-shadow-outline);
+  filter: url(#pixel-outline);
 }
 
 body {
@@ -145,7 +145,6 @@ body {
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
-  text-shadow: var(--pui-shadow-outline);
   transition: transform 0.05s, filter 0.05s;
 }
 
@@ -239,9 +238,9 @@ body {
         }
 
         /* Special "Active/Selected" glow for the label */
-        .pixel-radio input:checked ~ span {
+        .pixel-radio input:checked ~ .label-text {
             color: var(--accent-fill);
-            text-shadow: var(--pui-shadow-outline);
+            filter: url(#pixel-outline);
         }
 
         .label-text {
@@ -313,9 +312,9 @@ body {
 }
 
 /* Active state for label */
-.pixel-checkbox input:checked ~ span {
+.pixel-checkbox input:checked ~ .label-text {
   color: var(--accent-fill);
-  text-shadow: var(--pui-shadow-outline);
+  filter: url(#pixel-outline);
 }
 
 /* Disabled State */
@@ -344,7 +343,7 @@ body {
   font-family: 'FSEX302', sans-serif;
   font-size: 20px;
   margin-bottom: 10px;
-  text-shadow: var(--pui-shadow-outline);
+  filter: url(#pixel-outline);
   color: var(--text-main);
 }
 
@@ -479,8 +478,8 @@ input:checked + .track .handle {
 
 /* --- Pixel Content Box --- */
 
-p, li {
-  font-family: 'PixelBody', sans-serif;
+p, li, .pixel-list {
+  font-family: 'FSEX302', sans-serif;
   -webkit-font-smoothing: none;
   line-height: 1.4;
 }
@@ -609,7 +608,8 @@ ul.pixel-panel-base {
   padding: 15px;
   image-rendering: pixelated;
   color: var(--pui-color-0);
-  max-height: 180px;
+  width: 354px; /* Adjusted to fit pixel-grid (300px) + padding (2*15px) + border (2*12px) */
+  height: 180px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--pui-color-10) var(--pui-color-2);
@@ -661,7 +661,6 @@ ul.pixel-panel-base {
   width: 24px;
   height: 24px;
   background-color: transparent;
-
   image-rendering: pixelated;
   display: flex;
   align-items: center;
@@ -699,19 +698,36 @@ ul.pixel-panel-base {
 .pixel-tooltip .tooltip-text {
   visibility: hidden;
   width: 140px;
-  background-color: var(--pui-color-1);
+  background-color: rgba(28, 17, 23, 0.95); /* Semi-transparent --pui-color-0 */
   color: #fff;
   text-align: center;
   padding: 8px;
-  border: 4px solid var(--pui-color-31);
+  border: none;
   position: absolute;
   z-index: 100;
   bottom: 125%;
   left: 50%;
-  margin-left: -70px;
-  font-size: 14px;
+  transform: translateX(-50%);
+  font-family: 'PressStart2P', sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
   image-rendering: pixelated;
+  filter: url(#pixel-box-shadow);
   pointer-events: none;
+}
+
+/* Fix for tooltips on the left edge of the screen */
+.pixel-tooltip.left-edge .tooltip-text {
+  left: 0;
+  transform: translateX(0);
+  text-align: left;
+}
+
+.pixel-tooltip .tooltip-text span {
+  font-family: 'FSEX302', sans-serif;
+  font-size: 16px;
+  display: block;
+  margin-top: 4px;
 }
 
 .pixel-tooltip:hover .tooltip-text {
@@ -752,7 +768,6 @@ ul.pixel-panel-base {
   font-size: 16px;
   cursor: url('assets/cursor_glove.png'), pointer;
   image-rendering: pixelated;
-  text-shadow: var(--pui-shadow-outline);
   text-transform: uppercase;
   user-select: none;
 }
@@ -764,7 +779,7 @@ ul.pixel-panel-base {
 .pixel-tab.active {
   border-image-source: url('assets/activetab1.svg');
   border-image-slice: 6 6 0 6 fill;
-  color: var(--pui-color-31);
+  color: var(--pui-color-0);
   z-index: 3;
 }
 
@@ -786,6 +801,7 @@ ul.pixel-panel-base {
   padding: 10px 20px;
   z-index: 2000;
   image-rendering: pixelated;
+  filter: url(#pixel-box-shadow);
   animation: pixelSlideIn 0.3s steps(4);
   display: none;
 }
