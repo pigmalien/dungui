@@ -127,6 +127,29 @@ h2 {
   filter: url(#pixel-outline);
 }
 
+/* Modular UI Components */
+.pixel-border {
+  border: 12px solid transparent;
+  border-image-source: url('assets/panel1.svg');
+  border-image-slice: 6 fill;
+  border-image-width: 12px;
+  image-rendering: pixelated;
+}
+
+.pixel-selectable {
+  cursor: url('assets/cursor_glove.png'), pointer;
+  transition: filter 0.05s, transform 0.05s;
+}
+
+.pixel-selectable:hover {
+  filter: brightness(1.1);
+}
+
+.pixel-selectable:active {
+  transform: translateY(1px);
+  filter: brightness(0.9);
+}
+
 body {
   background-color: var(--bg-body);
   color: var(--text-main);
@@ -510,7 +533,7 @@ p, li, .pixel-list {
 .pixel-panel-top {
   box-sizing: border-box;
   background-color: transparent;
-  border: 8px solid transparent;
+  border: 16px solid transparent;
   border-image-source: url('assets/combotop1.svg');
   border-image-slice: 8 fill;
   border-image-width: 16px;
@@ -600,13 +623,8 @@ ul.pixel-panel-base {
 }
 
 .pixel-panel {
-  background-color: solid transparent;
-  border: 12px solid transparent;
-  border-image-source: url('assets/panel1.svg');
-  border-image-slice: 6 fill;
-  border-image-width: 12px;
+  background-color: transparent;
   padding: 15px;
-  image-rendering: pixelated;
   color: var(--pui-color-0);
   width: 354px; /* Adjusted to fit pixel-grid (300px) + padding (2*15px) + border (2*12px) */
   height: 180px;
@@ -690,12 +708,7 @@ ul.pixel-panel-base {
 }
 
 /* --- Tooltips --- */
-.pixel-tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.pixel-tooltip .tooltip-text {
+.pixel-slot .tooltip-text {
   visibility: hidden;
   width: 140px;
   background-color: rgba(28, 17, 23, 0.95); /* Semi-transparent --pui-color-0 */
@@ -716,21 +729,34 @@ ul.pixel-panel-base {
   pointer-events: none;
 }
 
-/* Fix for tooltips on the left edge of the screen */
-.pixel-tooltip.left-edge .tooltip-text {
+/* Automatic Edge Detection using :nth-child */
+/* [Inference] Assuming 13 columns as default. First 3 columns align left. */
+.pixel-slot:nth-child(13n + 1) .tooltip-text,
+.pixel-slot:nth-child(13n + 2) .tooltip-text,
+.pixel-slot:nth-child(13n + 3) .tooltip-text {
   left: 0;
   transform: translateX(0);
   text-align: left;
 }
 
-.pixel-tooltip .tooltip-text span {
+/* Last 3 columns align right */
+.pixel-slot:nth-child(13n) .tooltip-text,
+.pixel-slot:nth-child(13n - 1) .tooltip-text,
+.pixel-slot:nth-child(13n - 2) .tooltip-text {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+  text-align: right;
+}
+
+.pixel-slot .tooltip-text span {
   font-family: 'FSEX302', sans-serif;
   font-size: 16px;
   display: block;
   margin-top: 4px;
 }
 
-.pixel-tooltip:hover .tooltip-text {
+.pixel-slot:hover .tooltip-text {
   visibility: visible;
 }
 
@@ -757,28 +783,21 @@ ul.pixel-panel-base {
 }
 
 .pixel-tab {
-  background-color: transparent;
   border: 12px solid transparent;
   border-image-source: url('assets/inactivetab1.svg');
   border-image-slice: 6 6 0 6 fill;
   border-image-width: 12px;
+  image-rendering: pixelated;
   color: var(--pui-color-25);
   padding: 8px 16px;
   font-family: 'FSEX302', sans-serif;
   font-size: 16px;
-  cursor: url('assets/cursor_glove.png'), pointer;
-  image-rendering: pixelated;
   text-transform: uppercase;
   user-select: none;
 }
 
-.pixel-tab:hover {
-  filter: brightness(1.1);
-}
-
 .pixel-tab.active {
   border-image-source: url('assets/activetab1.svg');
-  border-image-slice: 6 6 0 6 fill;
   color: var(--pui-color-0);
   z-index: 3;
 }
