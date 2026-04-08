@@ -53,15 +53,17 @@
 
         <div id="inventory" class="tab-content active">
             <div class="pixel-panel pixel-border">
-                <h2 class="text-pixel-shadow" style="margin-bottom: 20px;">INVENTORY</h2>
-                <ul id="inventory-grid" class="pixel-grid" style="max-width: 350px;"></ul>
+                <h3>backpack</h3>
+                <hr>
+                <ul id="inventory-grid" class="pixel-grid" style="max-width: 336px; list-style: none; padding: 0; margin: 0 auto;"></ul>
 
                 </div>
             </div>
 
         <div id="skills" class="tab-content">
             <div class="pixel-panel pixel-border">
-                <h2 class="text-pixel-shadow" style="margin-bottom: 40px;">SELECT CLASS</h2>
+                <h3>class select</h3>
+                <hr>
                 <div class="pixel-radio-group">
                     <label class="pixel-radio"><input type="radio" checked="checked" name="class"><span
                             class="checkmark"></span><span class="label-text">WARRIOR</span></label>
@@ -77,7 +79,8 @@
 
         <div id="map" class="tab-content">
             <div class="pixel-panel pixel-border">
-                <h2 class="text-pixel-shadow">WORLD MAP</h2>
+                <h3>quest map</h3>
+                <hr>
                 <p class="label-text">The map is currently shrouded in fog...</p>
             </div>
         </div>
@@ -161,7 +164,7 @@
 
         <div class="pixel-panel pixel-border" style="margin-top: 30px;">
             <h3 class="label-text"
-                style="margin-top: 0; position: sticky; top: -15px; background-color: var(--pui-color-32); padding-bottom: 5px;">
+                style="margin-top: 0; top: -15px; padding-bottom: 5px;">
                 STORAGE</h3>
             <ul class="pixel-list" style="list-style: none; padding: 0; margin: 0;">
                 <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Iron Sword</li>
@@ -216,24 +219,23 @@
             // Updated Inventory Generation Logic
             const inventory = [
                 { id: 'long_sword', name: 'IRON SWORD', effect: '+5 DMG', effectColor: '#4b7734', active: true },
-                ...Array.from({ length: 11 }, () => ({ 
-                    id: 'flask_full', 
-                    name: 'HEALTH POTION', 
-                    effect: 'Restores 50 HP', 
+                ...Array.from({ length: 125 }, () => ({  // Total 126 items (14x9)
+                    id: 'box_x', 
+                    name: 'LOCKED', 
+                    effect: 'Slot is locked', 
                     effectColor: 'var(--pui-color-14)' 
-                })),
-                ...Array.from({ length: 14 }, () => (null)) // Fill rest with null for :empty testing
+                }))
             ];
 
             const grid = document.getElementById('inventory-grid');
             
             function renderInventory() {
                 grid.innerHTML = inventory.map((item) => {
-                    if (!item) return `<li class="pixel-slot"></li>`;
+                    if (!item) return `<li class="pixel-slot" style="display: flex; align-items: center; justify-content: center;"></li>`;
                     
                     return `
-                        <li class="pixel-slot ${item.active ? 'active' : ''}">
-                            <svg class="pixel-icon">
+                        <li class="pixel-slot ${item.active ? 'active' : ''}" style="display: flex; align-items: center; justify-content: center; position: relative;">
+                            <svg class="pixel-icon" style="display: block;">
                                 <use href="assets/pixel-spritesheet.svg#${item.id}"></use>
                             </svg>
                             <span class="tooltip-text">${item.name}<br>
