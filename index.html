@@ -42,18 +42,18 @@
 
         <div style="margin-bottom: 30px;">
             <p class="label-text">CHARACTER NAME:</p>
-            <input type="text" class="pixel-input" placeholder="Enter Name..." value="Cupcake The Eternal">
+            <input type="text" class="pixel-input" placeholder="Enter Name..." value="Ray G. Quit">
         </div>
 
         <div class="pixel-tabs">
-            <div class="pixel-tab pixel-selectable active" data-tab="inventory">INVENTORY</div>
+            <div class="pixel-tab pixel-selectable active" data-tab="treasure">TREASURE</div>
             <div class="pixel-tab pixel-selectable" data-tab="skills">SKILLS</div>
             <div class="pixel-tab pixel-selectable" data-tab="map">MAP</div>
         </div>
 
-        <div id="inventory" class="tab-content active">
+        <div id="treasure" class="tab-content active">
             <div class="pixel-panel pixel-border">
-                <h3>backpack</h3>
+                <h3 style="color: var(--pui-color-4);">backpack</h3>
                 <hr>
                 <ul id="inventory-grid" class="pixel-grid" style="max-width: 336px; list-style: none; padding: 0; margin: 0 auto;"></ul>
 
@@ -62,7 +62,7 @@
 
         <div id="skills" class="tab-content">
             <div class="pixel-panel pixel-border">
-                <h3>class select</h3>
+                <h3 style="color: var(--pui-color-4);">class select</h3>
                 <hr>
                 <div class="pixel-radio-group">
                     <label class="pixel-radio"><input type="radio" checked="checked" name="class"><span
@@ -71,6 +71,8 @@
                             class="label-text">PALADIN</span></label>
                     <label class="pixel-radio"><input type="radio" name="class"><span class="checkmark"></span><span
                             class="label-text">MAGE</span></label>
+                    <label class="pixel-radio"><input type="radio" name="class"><span class="checkmark"></span><span
+                            class="label-text">ROGUE</span></label>
                     <label class="pixel-radio"><input type="radio" name="class" disabled><span
                             class="checkmark"></span><span class="label-text">NECROMANCER (LOCKED)</span></label>
                 </div>
@@ -79,7 +81,7 @@
 
         <div id="map" class="tab-content">
             <div class="pixel-panel pixel-border">
-                <h3>quest map</h3>
+                <h3 style="color: var(--pui-color-4);">quest map</h3>
                 <hr>
                 <p class="label-text">The map is currently shrouded in fog...</p>
             </div>
@@ -144,28 +146,24 @@
         </div>
 
         <div class="pixel-box-2" style="margin-top: 30px; max-width: 350px;">
-            <h3 class="label-text" style="margin-top: 0;">INVENTORY</h3>
-            <p style="font-size: 1;">Check your items and equipment.<br>Capacity: 12/20</p>
+            <h3 class="label-text" style="margin-top: 0;">missions</h3>
+            <p style="font-size: 1;">Defeet the slime.<br>Defeat the bats.<br>Defeat the dragon.<br>That escalated quickly.</p>
         </div>
 
-        <details class="pixel-accordion" style="margin-top: 30px; max-width: 350px;">
+        <details class="pixel-accordion" style="margin-top: 8px; max-width: 120px;" open>
             <summary class="pixel-panel-top">
-                <span>CHARACTER STATS</span>
+                <span class="title-adjust">inv</span>
                 <div class="indicator"></div>
             </summary>
             <div class="accordion-content">
-                <ul class="pixel-panel-base pixel-list">
-                    <li>Strength: 15</li>
-                    <li>Agility: 12</li>
-                    <li>Intelligence: 8</li>
-                </ul>
+                <ul id="accordion-grid" class="pixel-panel-base pixel-grid-2"></ul>
             </div>
         </details>
 
         <div class="pixel-panel pixel-border" style="margin-top: 30px;">
             <h3 class="label-text"
                 style="margin-top: 0; top: -15px; padding-bottom: 5px;">
-                STORAGE</h3>
+                quest list</h3>
             <ul class="pixel-list" style="list-style: none; padding: 0; margin: 0;">
                 <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Iron Sword</li>
                 <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Wooden Shield</li>
@@ -180,8 +178,8 @@
         </div>
 
         <div id="demo-toast" class="pixel-toast">
-            <span class="pixel-badge">NEW</span>
-            <span style="margin-left: 10px; font-family: 'FSEX302', sans-serif;">Item Picked Up!</span>
+            <span id="toast-badge" class="pixel-badge"></span>
+            <span id="toast-message" style="margin-left: 10px; font-family: 'FSEX302', sans-serif;"></span>
         </div>
 
         <div id="demo-modal" class="pixel-modal-backdrop">
@@ -203,10 +201,15 @@
                 html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
             });
 
-            const toastBtn = document.getElementById('toast-trigger');
             const toast = document.getElementById('demo-toast');
+            const toastBadge = document.getElementById('toast-badge');
+            const toastMessage = document.getElementById('toast-message');
+
+            const toastBtn = document.getElementById('toast-trigger');
             toastBtn.addEventListener('click', () => {
                 toast.style.display = 'block';
+                toastBadge.textContent = 'NEW';
+                toastMessage.textContent = 'Item Picked Up!';
                 setTimeout(() => { toast.style.display = 'none'; }, 3000);
             });
 
@@ -247,6 +250,56 @@
             }
 
             renderInventory();
+
+            // Accordion Icon Grid Logic
+            const spritesheetIcons = [
+                'wood_buckler', 'heraldic_buckler', 'heater_shield', 'heraldic_shield', 'glove', 'belt', 'boot', 'helmet', 'scroll', 'letter', 'guild_board', 'map', 'book', 'satchel',
+                'dagger', 'short_sword', 'broad_sword', 'long_sword', 'tunic', 'robe', 'cuirass_armor', 'plate_armor', 'carrot', 'apple', 'cheese', 'bread', 'fish', 'meat',
+                'hatchet', 'battle_axe', 'wand', 'staff', 'necklace', 'ring', 'crown', 'diamond', 'joypad_a', 'joypad_an', 'joypad_ae', 'joypad_as', 'joypad_aw', 'mouse',
+                'arrow', 'bow', 'crossbow', 'bomb', 'bones', 'coins', 'coin', 'ruby', 'joypad_b', 'joypad_bn', 'joypad_be', 'joypad_bs', 'joypad_bw', 'mouse_left',
+                'spear', 'scythe', 'hammer', 'halberd', 'face_happy', 'face_sad', 'face_angry', 'face_neutral', 'joystick', 'joystick_n', 'joystick_e', 'joystick_s', 'joystick_w', 'mouse_right',
+                'shovel', 'pickaxe', 'torch', 'hazard', 'chat_bubble', 'x_bubble', 'dead_bubble', 'love_bubble', 'joypad_c', 'joypad_cn', 'joypad_ce', 'joypad_cs', 'joypad_cw', 'gamepad',
+                'flask_half', 'flask_full', 'hourglass_start', 'hourglass_end', 'circle_outline', 'x_mark', '!_bubble', '?_bubble', 'chevron_up', 'chevron_right', 'chevron_down', 'chevron_left', 'maximize', 'align',
+                'music_note', 'volume_high', 'volume_low', 'floppy_disk', 'box_empty', 'box_x', 'half_heart', 'full_heart', 'arrow_up', 'arrow_right', 'arrow_down', 'arrow_left', 'expand', 'move',
+                'house', 'trophy', 'person', 'group', 'target', 'selection_box', 'empty_heart', 'split_arrow', 'return_top', 'return_right', 'return_down', 'return_left', 'resize_width', 'resize_height'
+            ];
+            const accGrid = document.getElementById('accordion-grid');
+
+            function renderAccordion() {
+                accGrid.innerHTML = spritesheetIcons.map(id => `
+                    <li class="pixel-slot">
+                        <svg class="pixel-icon"><use href="assets/pixel-spritesheet.svg#${id}"></use></svg>
+                        <span class="tooltip-text"><span>${id}</span></span>
+                    </li>
+                `).join('');
+            }
+            renderAccordion();
+
+            // Add functionality to copy icon ID from accordion to clipboard
+            accGrid.addEventListener('click', async (event) => {
+                const clickedSlot = event.target.closest('.pixel-slot');
+                if (clickedSlot) {
+                    const useElement = clickedSlot.querySelector('use');
+                    if (useElement) {
+                        const href = useElement.getAttribute('href');
+                        const iconId = href.split('#')[1]; // Extract the ID from the href
+
+                        try {
+                            await navigator.clipboard.writeText(iconId);
+                            toastBadge.textContent = 'COPIED';
+                            toastMessage.textContent = `ID copied: ${iconId}`;
+                            toast.style.display = 'block';
+                            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+                        } catch (err) {
+                            console.error('Failed to copy text: ', err);
+                            toastBadge.textContent = 'ERROR';
+                            toastMessage.textContent = 'Failed to copy ID.';
+                            toast.style.display = 'block';
+                            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+                        }
+                    }
+                }
+            });
 
             const tabs = document.querySelectorAll('.pixel-tab');
             const contents = document.querySelectorAll('.tab-content');

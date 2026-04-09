@@ -36,7 +36,6 @@ h2 {
 
 h3 { 
   font-family: 'DungeonFont', sans-serif;
-  color: var(--pui-color-4);
   display: block;
   text-align: center;
   font-size: 2em;
@@ -72,7 +71,7 @@ hr::after  { right: -8px; box-shadow: -4px 0 0 var(--pui-color-25); } /* Right d
 
 :root {
   /* Dark Tones (Shadows/Borders) */
-  --pui-color-0: #1c1117;   /* [cite: 1] */
+  --pui-color-0: rgba(28, 17, 23, 0.90);   /* [cite: 1] */
   --pui-color-1: #301e28;   /* [cite: 1] */
   --pui-color-2: #3a2430;   /* [cite: 1] */
   --pui-color-3: #4b202e;   /* [cite: 1] */
@@ -168,7 +167,7 @@ hr::after  { right: -8px; box-shadow: -4px 0 0 var(--pui-color-25); } /* Right d
   border: 12px solid transparent;
   border-image-source: url('assets/panel1.svg');
   border-image-slice: 6 fill;
-  border-image-width: 6px;
+  border-image-width: 12px;
   image-rendering: pixelated;
 }
 
@@ -568,25 +567,28 @@ p, li, .pixel-list {
 
 .pixel-panel-top {
   box-sizing: border-box;
+  height: 38px;
   background-color: transparent;
-  border: 16px solid transparent;
+  border: 8px solid transparent;
   border-image-source: url('assets/combotop1.svg');
   border-image-slice: 8 fill;
-  border-image-width: 16px;
-  padding: 15px;
+  border-image-width: 16px; 
   image-rendering: pixelated;
   color: var(--pui-color-0);
 }
 
 .pixel-panel-base {
   background-color: transparent;
-  border: 16px solid transparent;
-  border-image-source: url('assets/combobase1.svg');
+  border: 8px solid transparent;
+  border-image-source: url('assets/combobase2.svg');
   border-image-slice: 8 fill;
   border-image-width: 16px;
-  padding: 15px;
+  padding: 0 4px 4px 4px; /* Reduced top padding to remove empty space */
   image-rendering: pixelated;
-  color: var(--pui-color-0);
+}
+
+.title-adjust {
+  margin-bottom: -6px; /* Adjust this value as needed to fine-tune the title position */
 }
 
 /* --- Pixel Progress Bar --- */
@@ -621,12 +623,13 @@ p, li, .pixel-list {
 .pixel-accordion summary {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Centered the text and indicator */
   align-items: center;
   cursor: url('assets/cursor_glove.png'), pointer;
   outline-style: none;
-  font-family: 'FSEX302', sans-serif;
-  font-size: 22px;
+  font-family: 'DungeonFont', sans-serif;
+  font-size: 28px;
+  color: var(--pui-color-4);
   user-select: none;
 }
 
@@ -634,19 +637,6 @@ p, li, .pixel-list {
   display: none;
 }
 
-.pixel-accordion .indicator {
-  width: 24px;
-  height: 24px;
-  background-image: url('assets/chevron1.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  image-rendering: pixelated;
-  transition: transform 0.20s steps(6);
-}
-
-.pixel-accordion[open] .indicator {
-  transform: rotate(180deg);
-}
 
 .accordion-content {
   margin-top: 0;
@@ -654,8 +644,25 @@ p, li, .pixel-list {
 
 ul.pixel-panel-base {
   list-style: none;
-  margin: 0;
-  padding: 16px;
+}
+
+/* New style for accordion grid */
+.pixel-accordion details[open] .accordion-content {
+  max-height: 1000px; /* A sufficiently large value to contain all icons */
+}
+
+.pixel-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(4, 24px);
+  width: fit-content; /* Allow margin auto to center it */
+  margin: 0 auto; /* Center the grid within its parent */
+}
+
+.pixel-grid-2 .pixel-slot {
+  background-image: url('assets/slota.svg');
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  image-rendering: pixelated;
 }
 
 .pixel-panel {
@@ -748,14 +755,14 @@ ul.pixel-panel-base {
 .pixel-slot .tooltip-text {
   visibility: hidden;
   width: 140px;
-  background-color: rgba(28, 17, 23, 0.95); /* Semi-transparent --pui-color-0 */
+  background-color: var(--pui-color-0); /* Semi-transparent --pui-color-0 */
   color: #fff;
   text-align: center;
   padding: 8px;
   border: none;
   position: absolute;
   z-index: 100;
-  bottom: 125%;
+  top: 125%;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'PressStart2P', sans-serif;
@@ -780,6 +787,20 @@ ul.pixel-panel-base {
 .pixel-slot:nth-child(14n) .tooltip-text,
 .pixel-slot:nth-child(14n - 1) .tooltip-text,
 .pixel-slot:nth-child(14n - 2) .tooltip-text {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+  text-align: right;
+}
+
+/* Tooltip Edge Detection for 4-column grids (Accordion) */
+.pixel-grid-2 .pixel-slot:nth-child(4n + 1) .tooltip-text {
+  left: 0;
+  transform: translateX(0);
+  text-align: left;
+}
+
+.pixel-grid-2 .pixel-slot:nth-child(4n) .tooltip-text {
   left: auto;
   right: 0;
   transform: translateX(0);
