@@ -71,7 +71,7 @@ hr::after  { right: -8px; box-shadow: -4px 0 0 var(--pui-color-25); } /* Right d
 
 :root {
   /* Dark Tones (Shadows/Borders) */
-  --pui-color-0: rgba(28, 17, 23, 0.90);   /* [cite: 1] */
+  --pui-color-0: #1c1117e6;   /* [cite: 1] */
   --pui-color-1: #301e28;   /* [cite: 1] */
   --pui-color-2: #3a2430;   /* [cite: 1] */
   --pui-color-3: #4b202e;   /* [cite: 1] */
@@ -96,7 +96,7 @@ hr::after  { right: -8px; box-shadow: -4px 0 0 var(--pui-color-25); } /* Right d
   --pui-color-18: #7e5e3d;  /* [cite: 1] */
   --pui-color-19: #4b7734;  /* [cite: 1] */
   --pui-color-20: #75675f;  /* [cite: 1] */
-  --pui-color-21: #aa6623;  /* [cite: 1] */
+  --pui-color-21: #aa6723;  /* [cite: 1] */
   --pui-color-22: #5c8faa;  /* [cite: 1, 2] */
   --pui-color-23: #c27d3a;  /* [cite: 2] */
 
@@ -736,8 +736,20 @@ ul.pixel-panel-base {
 }
 
 .pixel-slot.active {
-  border: 1px solid var(--pui-color-8);
-  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.2);
+  z-index: 5; /* Ensure the active selection appears above neighboring slots */
+}
+
+.pixel-slot .selection-icon {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  color: var(--pui-color-31);
+}
+
+.pixel-slot.active .selection-icon {
+  display: block;
 }
 
 /* --- Spritesheet Icons --- */

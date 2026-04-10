@@ -165,14 +165,14 @@
                 style="margin-top: 0; top: -15px; padding-bottom: 5px;">
                 quest list</h3>
             <ul class="pixel-list" style="list-style: none; padding: 0; margin: 0;">
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Iron Sword</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Wooden Shield</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Health Potion x5</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Mana Potion x2</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Leather Boots</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Rusty Key</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Dragon Scale</li>
-                <li style="border-bottom: 1px solid rgba(0,0,0,0.1); padding: 5px 0;">• Old Map</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Iron Sword</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Wooden Shield</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Health Potion x5</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Mana Potion x2</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Leather Boots</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Rusty Key</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Dragon Scale</li>
+                <li style="border-bottom: 1px solid var(--pui-color-25); padding: 5px 0;">• Old Map</li>
                 <li style="padding: 5px 0;">• Smoke Bomb</li>
             </ul>
         </div>
@@ -223,9 +223,9 @@
             const inventory = [
                 { id: 'long_sword', name: 'IRON SWORD', effect: '+5 DMG', effectColor: '#4b7734', active: true },
                 ...Array.from({ length: 125 }, () => ({  // Total 126 items (14x9)
-                    id: 'box_x', 
-                    name: 'LOCKED', 
-                    effect: 'Slot is locked', 
+                    id: 'flask_full', 
+                    name: 'POTION', 
+                    effect: 'Small Potion', 
                     effectColor: 'var(--pui-color-14)' 
                 }))
             ];
@@ -233,13 +233,16 @@
             const grid = document.getElementById('inventory-grid');
             
             function renderInventory() {
-                grid.innerHTML = inventory.map((item) => {
-                    if (!item) return `<li class="pixel-slot" style="display: flex; align-items: center; justify-content: center;"></li>`;
+                grid.innerHTML = inventory.map((item, index) => {
+                    if (!item) return `<li class="pixel-slot" data-index="${index}" style="display: flex; align-items: center; justify-content: center;"><svg class="pixel-icon selection-icon"><use href="assets/pixel-spritesheet.svg#selection_box"></use></svg></li>`;
                     
                     return `
-                        <li class="pixel-slot ${item.active ? 'active' : ''}" style="display: flex; align-items: center; justify-content: center; position: relative;">
+                        <li class="pixel-slot ${item.active ? 'active' : ''}" data-index="${index}" style="display: flex; align-items: center; justify-content: center; position: relative;">
                             <svg class="pixel-icon" style="display: block;">
                                 <use href="assets/pixel-spritesheet.svg#${item.id}"></use>
+                            </svg>
+                            <svg class="pixel-icon selection-icon">
+                                <use href="assets/pixel-spritesheet.svg#selection_box"></use>
                             </svg>
                             <span class="tooltip-text">${item.name}<br>
                                 <span style="color: ${item.effectColor};">${item.effect}</span>
@@ -250,6 +253,16 @@
             }
 
             renderInventory();
+
+            // Handle item selection logic
+            grid.addEventListener('click', (event) => {
+                const clickedSlot = event.target.closest('.pixel-slot');
+                if (clickedSlot) {
+                    const index = parseInt(clickedSlot.dataset.index);
+                    inventory.forEach((item, i) => { if (item) item.active = (i === index); });
+                    renderInventory();
+                }
+            });
 
             // Accordion Icon Grid Logic
             const spritesheetIcons = [
